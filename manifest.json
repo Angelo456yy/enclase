@@ -1,0 +1,24 @@
+{
+    "format_version": 1,
+    "header": {
+        "description": "[1.2.0]§cAdd dangerous Blood Moons to your world!!",
+        "name": "§4bum_Bloodmoon! BP",
+        "uuid": "20443f3a-c3c7-4eae-9b9d-d264fa62122b",
+		"min_engine_version": [1, 12, 0],
+        "version": [1, 2, 0]
+    },
+    "modules": [
+        {
+            "description": "§cbum_Bloodmoon!",
+            "type": "data",
+            "uuid": "afabeb86-b02b-4f21-b054-93e881a1f2e8",
+            "version": [1, 2, 0]
+        }
+    ],
+    "dependencies": [
+        {
+            "uuid": "87127ba7-79e8-40b0-a93c-9257b99df60b",
+            "version": [1, 2, 0]
+        }
+    ]
+}

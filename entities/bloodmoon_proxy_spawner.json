@@ -1,0 +1,208 @@
+{
+	"format_version": "1.16.210",
+	"minecraft:entity": {
+		"description": {
+			"identifier": "bumble:bloodmoon_spawn"
+		},
+
+		"component_groups": {
+			"bumble:despawn": {
+				"minecraft:instant_despawn": {}
+			}
+		},
+		"components": {
+			"minecraft:type_family": {
+				"family": ["bumspawner"]
+			},
+			"minecraft:physics": {}
+		},
+
+		"events": {
+
+			"minecraft:entity_spawned": {
+				"sequence": [{
+						"filters": {
+							"test": "moon_phase",
+							"operator": "==",
+							"value": 1
+						},
+						"sequence": [{
+								"filters": {
+									"test": "hourly_clock_time",
+									"operator": ">=",
+									"value": 13000
+								},
+								"sequence": [{
+										"filters": {
+											"test": "hourly_clock_time",
+											"operator": "<",
+											"value": 23000
+										},
+										"sequence": [{
+												"run_command": {
+													"command": [
+														"execute @a[scores={bmtrack=!1}] ~~~ function bm_rise"
+													]
+												}
+											},
+
+											{
+												"randomize": [{
+														"weight": 70,
+														"run_command": {
+															"command": [
+																"summon minecraft:zombie ~~~"
+															]
+														}
+													},
+													{
+														"weight": 70,
+														"run_command": {
+															"command": [
+																"summon minecraft:skeleton ~~~"
+															]
+														}
+													},
+													{
+														"weight": 5,
+														"run_command": {
+															"command": [
+																"summon minecraft:witch ~~~"
+															]
+														}
+													},
+													{
+														"weight": 30,
+														"run_command": {
+															"command": [
+																"summon minecraft:phantom ~~~"
+															]
+														}
+													},
+													{
+														"weight": 10,
+														"run_command": {
+															"command": [
+																"summon minecraft:slime ~~~"
+															]
+														}
+													},
+													{
+														"weight": 5,
+														"run_command": {
+															"command": [
+																"summon minecraft:evocation_illager ~~~"
+															]
+														}
+													},
+													{
+														"weight": 25,
+														"run_command": {
+															"command": [
+																"summon minecraft:stray ~~~"
+															]
+														}
+													},
+													{
+														"weight": 20,
+														"run_command": {
+															"command": [
+																"summon minecraft:enderman ~~~"
+															]
+														}
+													},
+													{
+														"weight": 5,
+														"run_command": {
+															"command": [
+																"summon minecraft:vindicator ~~~"
+															]
+														}
+													},
+													{
+														"weight": 35,
+														"run_command": {
+															"command": [
+																"summon minecraft:endermite ~~~"
+															]
+														}
+													},
+													{
+														"weight": 50,
+														"run_command": {
+															"command": [
+																"summon minecraft:zombie_villager ~~~"
+															]
+														}
+													},
+													{
+														"weight": 10,
+														"run_command": {
+															"command": [
+																"summon minecraft:bat ~~~"
+															]
+														}
+													}
+												]
+											}
+										]
+
+									}
+
+								]
+
+							},
+							{
+								"sequence": [{
+									"filters": {
+										"test": "hourly_clock_time",
+										"operator": "<",
+										"value": 13000
+									},
+									"run_command": {
+										"command": [
+											"execute @a[scores={bmtrack=1}] ~~~ function bm_fade"
+										]
+									}
+								}]
+							},
+							{
+								"sequence": [{
+									"filters": {
+										"test": "hourly_clock_time",
+										"operator": ">=",
+										"value": 23000
+									},
+									"run_command": {
+										"command": [
+											"execute @a[scores={bmtrack=1}] ~~~ function bm_fade"
+										]
+									}
+								}]
+							}
+						]
+					},
+					{
+						"filters": {
+							"test": "moon_phase",
+							"operator": "!=",
+							"value": 1
+						},
+						"sequence": [{
+							"run_command": {
+								"command": [
+									"execute @a[scores={bmtrack=1}] ~~~ function bm_fade"
+								]
+							}
+						}]
+					},
+					{
+						"add": {
+							"component_groups": ["bumble:despawn"]
+						}
+					}
+				]
+			}
+		}
+	}
+}
